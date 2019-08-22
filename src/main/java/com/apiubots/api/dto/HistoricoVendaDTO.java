@@ -1,13 +1,21 @@
 package com.apiubots.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 import java.util.List;
 
 public class HistoricoVendaDTO implements Serializable {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String codigo;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String data;
+
     private ClienteDTO clienteDTO;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ProdutoDTO> itens;
     private Double precoTotal;
 

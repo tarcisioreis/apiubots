@@ -1,10 +1,15 @@
 package com.apiubots.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import java.io.Serializable;
 
 public class ProdutoDTO implements Serializable {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String codigo;
+
     private String descricao;
     private String variedade;
     private String paisOrigem;

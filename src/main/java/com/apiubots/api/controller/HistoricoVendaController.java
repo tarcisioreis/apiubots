@@ -9,11 +9,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,6 +23,7 @@ public class HistoricoVendaController {
     private final HistoricoVendaService historicoVendaService;
 
     private List<HistoricoVendaDTO> lista;
+    private HistoricoVendaDTO historicoVendaDTO;
 
     @Autowired
     public HistoricoVendaController(HistoricoVendaService historicoVendaService) {
@@ -40,6 +39,42 @@ public class HistoricoVendaController {
 
             if (lista.size() == 0 || lista.isEmpty()) {
                 throw new BusinessException("Não foram encontrados historico de vendas.");
+            }
+
+            return new ResponseEntity<>(lista, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+
+    }
+
+    @GetMapping("/listClienteMaiorValorTotalCompra")
+    @ApiOperation(value="Listagem de Clientes pelo maior valor total de compras.")
+    ResponseEntity<List<HistoricoVendaDTO>> listClienteMaiorValorTotalCompra() {
+
+        try {
+            lista = historicoVendaService.findClienteMaiorValorTotalCompra();
+
+            if (lista.size() == 0 || lista.isEmpty()) {
+                throw new BusinessException("Não foram encontrados historico de venda para clientes.");
+            }
+
+            return new ResponseEntity<>(lista, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+
+    }
+
+    @GetMapping("/listClienteMaiorValorTotalCompraUnicaPorAno/{ano}")
+    @ApiOperation(value="Mostra o Cliente com maior valor total de compra unica por ano.")
+    ResponseEntity<List<HistoricoVendaDTO>> listClienteMaiorValorTotalCompraUnicaPorAno(@Valid @PathVariable int ano) {
+
+        try {
+            lista = historicoVendaService.findClienteMaiorValorTotalCompraUnicaPorAno(ano);
+
+            if (lista.size() == 0 || lista.isEmpty()) {
+                throw new BusinessException("Não foi encontrado historico de venda para o ano informado.");
             }
 
             return new ResponseEntity<>(lista, HttpStatus.OK);

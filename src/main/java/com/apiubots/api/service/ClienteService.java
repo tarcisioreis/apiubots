@@ -2,6 +2,7 @@ package com.apiubots.api.service;
 
 import com.apiubots.api.constantes.Constantes;
 import com.apiubots.api.dto.ClienteDTO;
+import com.apiubots.api.dto.HistoricoVendaDTO;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,11 @@ import java.util.List;
 @Service
 public class ClienteService {
 
-    private OkHttpClient httpClient;
-    private Response response;
     private List<ClienteDTO> lista;
     private ClienteDTO clienteDTO;
+
+    private OkHttpClient httpClient;
+    private Response response;
     private Request request;
 
     @Autowired
@@ -72,14 +74,14 @@ public class ClienteService {
         try {
             lista = this.findAll();
 
-            for(ClienteDTO clienteDTO : lista) {
-                String objCpf = clienteDTO.getCpf();
+            for(ClienteDTO dto : lista) {
+                String objCpf = dto.getCpf();
                 String paramCpf = cpf.substring(cpf.length() - 2);
 
                 objCpf = objCpf.substring(objCpf.length() - 2);
 
                 if (paramCpf.equals(objCpf)) {
-                    return clienteDTO;
+                    return dto;
                 }
             }
 
