@@ -39,6 +39,9 @@ Métodos implementados:
 3) listClienteMaiorValorTotalCompraUnicaPorAno - via GET - parâmetro ano - conforme item 2 das novas funcionalidades, Mostre o cliente com maior compra única no último ano (2016) - Observação: somente passar o ano desejado como parâmetro no final da URL -
 retorna JSON com dados do Cliente e Preço Total da compra efetuado no ano informado;
 
+4) recomendarVinhoaClientePorPerfildeCompra - via GET - parâmetros variedade do vinho e nome do cliente - conforme item 4 das novas funcionalidades, Recomende um vinho para um determinado cliente a partir do histórico de compras - retorna JSON com dados do Cliente e se consumiu algum vinho da variedade informada, validações da existência do nome do cliente e variedade do vinho.
+
+
 Requisitos para funcionamento:
 
 Ter o Eclipse/Intellij como IDE com Maven para isso somente importar como Projeto Maven;
