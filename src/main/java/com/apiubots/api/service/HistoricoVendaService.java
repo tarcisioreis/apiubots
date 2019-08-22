@@ -341,4 +341,71 @@ public class HistoricoVendaService {
         return listaFidelidade;
     }
 
+    public ProdutoDTO findByVariedade(String variedade) {
+        ProdutoDTO retorno = null;
+        boolean sair = false;
+
+        try {
+            lista = this.findAll();
+
+            for(HistoricoVendaDTO histDTO : lista) {
+                for(int i = 0; i < histDTO.getItens().size(); i++) {
+                    if (histDTO.getItens().get(i).getVariedade().toLowerCase().equals(variedade.toLowerCase())) {
+                        retorno = histDTO.getItens().get(i);
+                        sair = true;
+                        break;
+                    }
+                }
+
+                if (sair) {
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+
+        return retorno;
+    }
+
+    public List<HistoricoVendaDTO> recomendarVinhoaClientePorPerfildeCompra(String variedade, String nome) {
+        List<HistoricoVendaDTO> listaRecomendacao = new ArrayList<HistoricoVendaDTO>();
+
+        boolean sair = false;
+
+        try {
+            lista = this.findAll();
+
+            for(HistoricoVendaDTO histDTO : lista) {
+                if (histDTO.getClienteDTO().getNome().toLowerCase().equals(nome.toLowerCase())) {
+                    for(int i = 0; i < histDTO.getItens().size(); i++) {
+                        if (histDTO.getItens().get(i).getVariedade().toLowerCase().equals(variedade.toLowerCase())) {
+                            HistoricoVendaDTO historicoVendaDTO = new HistoricoVendaDTO();
+                            ProdutoDTO produtoDTO = new ProdutoDTO();
+                            List<ProdutoDTO> listaProdutoDTO = new ArrayList<ProdutoDTO>();
+
+                            produtoDTO = histDTO.getItens().get(i);
+                            listaProdutoDTO.add(produtoDTO);
+
+                            historicoVendaDTO = histDTO;
+                            historicoVendaDTO.setItens(listaProdutoDTO);
+
+                            listaRecomendacao.add(historicoVendaDTO);
+                            sair = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (sair) {
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            return Collections.EMPTY_LIST;
+        }
+
+        return listaRecomendacao;
+    }
+
 }

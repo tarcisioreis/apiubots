@@ -92,4 +92,24 @@ public class ClienteService {
 
     }
 
+    public ClienteDTO findByNome(String nome) {
+
+        clienteDTO = new ClienteDTO();
+
+        try {
+            lista = this.findAll();
+
+            for(ClienteDTO dto : lista) {
+                if (dto.getNome().toLowerCase().equals(nome.toLowerCase())) {
+                    return dto;
+                }
+            }
+
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
+
 }
