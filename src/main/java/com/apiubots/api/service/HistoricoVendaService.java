@@ -282,4 +282,63 @@ public class HistoricoVendaService {
         return listaUnica;
     }
 
+    public List<HistoricoVendaDTO> findClienteFidelidade() {
+        List<HistoricoVendaDTO> listaFidelidade = new ArrayList<HistoricoVendaDTO>();
+        historicoVendaDTO = new HistoricoVendaDTO();
+
+        int i = 0;
+        boolean achou = false;
+
+        try {
+            lista = this.findAll();
+
+            do {
+
+                if (listaFidelidade.size() == 0) {   // Primeiro a ser testado a existencia de alguma compra
+                    historicoVendaDTO = new HistoricoVendaDTO();
+
+                    historicoVendaDTO.setClienteDTO(lista.get(i).getClienteDTO());
+                    historicoVendaDTO.setPrecoTotal(lista.get(i).getPrecoTotal());
+                    historicoVendaDTO.setItens(lista.get(i).getItens());
+
+                    historicoVendaDTO.setCodigo(null);
+                    historicoVendaDTO.setData(null);
+
+                    listaFidelidade.add(historicoVendaDTO);
+                } else if (lista.get(i).getClienteDTO().getId() != historicoVendaDTO.getClienteDTO().getId()) {
+
+                    achou = false;
+                    for (int ii = 0; ii < listaFidelidade.size(); ii++) {
+                        if (listaFidelidade.get(ii).getClienteDTO().getId() == lista.get(i).getClienteDTO().getId()) {
+                            achou = true;
+                            break;
+                        }
+                    }
+
+                    if (!achou) {
+                        historicoVendaDTO = null;
+                        historicoVendaDTO = new HistoricoVendaDTO();
+
+                        historicoVendaDTO.setClienteDTO(lista.get(i).getClienteDTO());
+                        historicoVendaDTO.setPrecoTotal(lista.get(i).getPrecoTotal());
+                        historicoVendaDTO.setItens(lista.get(i).getItens());
+
+                        historicoVendaDTO.setCodigo(null);
+                        historicoVendaDTO.setData(null);
+
+                        listaFidelidade.add(historicoVendaDTO);
+                    }
+                }
+
+                i++;
+            } while(i < lista.size());
+        } catch (Exception e) {
+            return Collections.EMPTY_LIST;
+        }
+
+        Collections.sort(listaFidelidade, new HistoricoVendaComparator());
+
+        return listaFidelidade;
+    }
+
 }
