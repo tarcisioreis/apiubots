@@ -32,6 +32,10 @@ Métodos implementados:
   
 1) list - via GET - Listagem de Todo o historico de vendas - retorna em JSON todas as informações como produto, valor total da compra;
 
+2) listClienteMaiorValorTotalCompra - via GET - conforme item 1 das novas funcionalidades, Liste os clientes ordenados pelo maior valor total em compras - retorna JSON com dados do Cliente e Preço Total da(s) compra(s);
+
+3) listClienteMaiorValorTotalCompraUnicaPorAno - via GET - parâmetro ano - conforme item 2 das novas funcionalidades, Mostre o cliente com maior compra única no último ano (2016) - Observação: somente passar o ano desejado como parâmetro no final da URL -
+retorna JSON com dados do Cliente e Preço Total da compra efetuado no ano informado;
 
 Requisitos para funcionamento:
 
