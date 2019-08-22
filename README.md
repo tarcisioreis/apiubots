@@ -27,6 +27,8 @@ Métodos implementados:
   ClienteController:
 
 1) list - via GET - Listagem de Todos os clientes - mostra codigo, nome e cpf;
+
+2) listFidelidade - via GET - conforme item 3 das novas funcionalidades, Liste os clientes mais fiéis - retorna JSON com dados do Cliente, Preço Total da(s) compra(s) e Produtos que foram comprados ao menos uma vez;
   
   HistoricoVendaController:
   
