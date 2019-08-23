@@ -48,4 +48,6 @@ Ter o Eclipse/Intellij como IDE com Maven para isso somente importar como Projet
 
 Para ver os Web Services instalei o SwaggerUI para interagir com a API. Acesso local: http://localhost:8080/swagger-ui.html
 
+Acesso online publicado no Heroku(Plataforma SaSS) - https://apiubots.herokuapp.com/swagger-ui.html
+
 Contato: Tarcisio Machado dos Reis - e-mail: tarcisio.reis.ti@gmail.com ou whatsapp 051 9 8490-4355.
